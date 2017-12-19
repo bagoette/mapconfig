@@ -3,6 +3,13 @@ const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const url = require('url');
 
+const io = require('socket.io-client');
+
+function log(msg)
+{
+   process.stdout.write(msg);
+}
+
 // Initialize window
 let window;
 
@@ -35,6 +42,22 @@ function CreateWindow()
    window.on('closed', () =>
    {
       window = null;
+   });
+   
+   let socket = io('http://166.250.57.228:9494');
+
+   log(socket);
+
+   socket.on('connect', () => 
+   {
+      log(socket.id);
+
+      socket.close();
+   });
+
+   socket.on('disconnect', () => 
+   {
+      log("Socket disconnected");
    });
 }
 
