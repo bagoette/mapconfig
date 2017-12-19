@@ -34,6 +34,8 @@ function Machine()
       {
          this.Ip3 = xmlMarker.ip2;
          this.Connections++;
+
+         console.log("");
       }
    };
 }
