@@ -1,0 +1,62 @@
+.container-scroll 
+{
+   overflow: hidden;
+   max-height: 350px;
+   border: 2px;
+   border-style: solid;
+   border-color: yellowgreen;
+   border-radius: 10px;
+
+   &:hover 
+   {
+      overflow-y: overlay;
+   }
+
+   >ul > li 
+   {
+      width: 100%;
+   }
+}
+
+.list-group-item 
+{
+   transition: color $transition-normal, background-color $transition-normal;
+
+   &:hover 
+   {
+      color: $fadedColor1;
+      background-color: #363636;
+   }
+
+   &.selected 
+   {
+      background-color: #363636;
+   }
+}
+
+
+/* Scrollbar styles */
+
+::-webkit-scrollbar 
+{
+   width: 12px;
+   height: 12px;
+}
+
+::-webkit-scrollbar-track 
+{
+   border: 1px solid grey;
+   border-radius: 10px;
+   background-color: #303030;
+}
+
+::-webkit-scrollbar-thumb 
+{
+   background: yellowgreen;
+   border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover 
+{
+   background: #88ba1c;
+}

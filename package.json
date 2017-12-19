@@ -1,0 +1,18 @@
+{
+  "name": "mapconfigtest",
+  "version": "1.0.0",
+  "description": "Machine Map Configurator",
+  "main": "./WebRoot/Assets/Js/main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Barney Goette",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^1.7.9",
+    "jquery": "^3.2.1",
+    "jsdom": "^11.5.1",
+    "xml2js": "^0.4.19"
+  },
+  "Theme": "Dark"
+}

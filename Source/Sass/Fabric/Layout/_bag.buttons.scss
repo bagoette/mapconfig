@@ -1,0 +1,23 @@
+.two-thirds > div 
+{
+   text-align: center;
+
+   > button 
+   {
+      margin: 20px;
+
+      width: 120px;
+   }
+}
+
+.one-third > div 
+{
+   text-align: center;
+
+   > button 
+   {
+      margin: 20px;
+
+      width: 40px;
+   }
+}
