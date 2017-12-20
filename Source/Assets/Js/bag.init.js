@@ -12,6 +12,7 @@ OnLoad(InitBtnStates);
 // Disable the buttons that shouldn't work on startup
 function InitBtnStates()
 {
+   // Create array of buttons to disable
    let buttons = 
    [
       document.getElementById("cancelBtn"),
@@ -19,6 +20,7 @@ function InitBtnStates()
       document.getElementById("undoBtn"),
    ];
 
+   // Disable all buttons in the array
    ForEach(buttons, (button) =>
    {
       button.classList.add("disabled");
@@ -66,7 +68,7 @@ function SetElementState(element, enable)
    // If enable is true...
    if (enable)
       // Remove disabled attribute
-      element.removeAttributeNode(attr);
+      element.removeAttribute("disabled");
    // Otherwise...
    else
       // Add disabled attribute

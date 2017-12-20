@@ -153,11 +153,13 @@
          <label class="status-message">Message</label>
       </div>
    </body>
-   <script src="./Assets/Js/aligner.js"></script>
-   <script src="./Assets/Js/menuHandler.js"></script>
-   <script src="./Assets/Js/init.js"></script>
-   <script src="./Assets/Js/dna.core.js"></script>
-   <script src="./Assets/Js/DataAccess/bag.typeEnum.js"></script>
-   <script src="./Assets/Js/DataAccess/bag.machine.js"></script>
-   <script src="./Assets/Js/DataAccess/bag.dataAccess.js"></script>
+   <script type="text/javascript" src="./Assets/Js/aligner.js"></script>
+   <script type="text/javascript" src="./Assets/Js/menuHandler.js"></script>
+   <script type="text/javascript" src="./Assets/Js/init.js"></script>
+   <script type="text/javascript" src="./Assets/Js/dna.core.js"></script>
+   <script type="text/javascript" src="./Assets/Js/bag.init.js"></script>
+   <script type="text/javascript" src="./Assets/Js/DataAccess/bag.typeEnum.js"></script>
+   <script type="text/javascript" src="./Assets/Js/bag.elementHandling.js"></script>
+   <script type="text/javascript" src="./Assets/Js/DataAccess/bag.machine.js"></script>
+   <script type="text/javascript" src="./Assets/Js/DataAccess/bag.dataAccess.js"></script>
 </html>
