@@ -1,5 +1,5 @@
 //******************************************************************************************
-//Creates a RailGrinder class with properties and methods
+//Creates a Machine class with properties and methods
 //******************************************************************************************
 function Machine()
 {

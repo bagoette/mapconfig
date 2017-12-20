@@ -8,6 +8,11 @@ document.addEventListener("DOMContentLoaded", function()
     ProcessOnLoad();
 });
 
+let bodyElement = document.getElementsByTagName("body")[0];
+let script = document.createElement("script");
+script.setAttribute("src", "./Assets/Js/bag.init.js");
+bodyElement.appendChild(script);
+
 // Helper function to iterate over arrays
 function ForEach(array, callback)
 {

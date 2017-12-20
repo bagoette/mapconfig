@@ -147,6 +147,11 @@
             </div>
          </div>
       </div>
+      
+      <div class="status-bar">
+         <label class="status-label">Status: </label>
+         <label class="status-message">Message</label>
+      </div>
    </body>
    <script src="./Assets/Js/aligner.js"></script>
    <script src="./Assets/Js/menuHandler.js"></script>
