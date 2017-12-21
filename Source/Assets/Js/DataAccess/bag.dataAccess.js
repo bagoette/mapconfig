@@ -5,12 +5,25 @@ const { parseString } = require('xml2js');
 // Declare Machines array
 let Machines = [];
 
+// Declare status message
+let StatusMessage;
+
 // Declare current machine
-let CurrentMachine = 
+const CurrentMachine = 
 {
    Value: null,
 
    Index: null,
+
+   ListItem: null,
+
+   SetListItem: function(item)
+   {
+      if (item === this.ListItem)
+         return;
+
+      this.ListItem = item;
+   },
 
    SetValue: function(value, index)
    {
@@ -25,6 +38,9 @@ let CurrentMachine =
 
 // Load machine data
 OnLoad(GetMachineDataFromFiles);
+
+// Set StatusMessage element on page load
+OnLoad(() => StatusMessage = document.querySelector(".status-message"));
 
 // Extracts data from GPS/IP.xml to Machine array
 function GetDataFromXml(files)
@@ -66,14 +82,17 @@ function TryRemoveMachine()
 {
    let response = confirm(`Press OK to delete ${CurrentMachine.Value.Name} or Cancel keep.`);
    
-   if (response)
+   if (response === true)
    {
       delete Machines[CurrentMachine.Value.Name];
 
-      RemoveListItem(CurrentMachine.Index);
+      const ul = document.getElementById("machineList");
+
+      RemoveListItemFromUl(CurrentMachine.ListItem, ul);
+      StatusMessage.innerHTML = `Deleted ${CurrentMachine.Value.Name}`;
    }
 
-   document.querySelector(".status-message").innerHTML = `Deleted ${CurrentMachine.Value.Name}`;
+   UpdateElementsWithData(new Machine());
 }
 
 // Setter for CurentMachine

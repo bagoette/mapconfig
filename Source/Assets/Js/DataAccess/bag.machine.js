@@ -3,6 +3,21 @@
 //******************************************************************************************
 function Machine()
 {
+   this.Name = "";
+   this.Latitude = ""; 
+   this.Longitude = "";
+   this.Date = "";
+   this.Time = ""; 
+   this.Speed = ""; 
+   this.Railroad = "";
+   this.Type = "";
+   this.Pingable = "";
+   this.Ip1 = "";
+   this.Ip2 = "";  
+   this.Ip3 = "";  
+
+   this.Connections = 1;
+
    this.SetGpsData = function(xmlMarker)
    {
       //Pull data from GPS.XML

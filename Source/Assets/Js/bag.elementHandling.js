@@ -39,52 +39,16 @@ function FillMachineList()
    });
 }
 
-NodeList.prototype.first = function(callback)
+function RemoveListItemFromUl(item, ul)
 {
-   let obj;
+   // Remove item from ul
+   ul.removeChild(item);
 
-   ForEach(this, (item, index) =>
+   // Loop through and reset indexes
+   ForEach(ul.children, (child, index) => 
    {
-      if (callback(item)) 
-      {
-         obj = item;
-
-         // Break out of loop
-         return true;
-      }
+      child.setAttribute("data-machine-index", index);
    });
-
-   return obj;
-}
-
-function RemoveListItem(index)
-{
-   let filteredItem = 
-      document.querySelectorAll("[data-machine-index]")
-         .first(item => item.getAttribute("data-machine-index") == index);
-
-   // Get machineList <ul> from document
-   let ul = document.getElementById("machineList");
-   let listItems = document.querySelectorAll("[data-machine-index]");
-
-   let li, found = false;
-   ForEach(listItems, (item, itemIndex) =>
-   {
-      if (found)
-         item.setAttribute("data-machine-index", itemIndex - 1);
-      else
-      {
-         if (item.getAttribute("data-machine-index") == index)
-         {
-            li = item;
-            found = true;
-         }
-         else
-            item.setAttribute("data-machine-index", itemIndex);
-      }
-   });
-
-   ul.removeChild(li);
 }
 
 // Called when user releases key in input
@@ -148,9 +112,12 @@ function ListItemClicked(event)
 
    // Set current machine
    CurrentMachine.SetValue(machine, index);
+   CurrentMachine.SetListItem(element);
 
    // Update HTML elements
    UpdateElementsWithData(machine);
+
+   StatusMessage.innerHTML = `${machine.Name} selected`;
 }
 
 function SetButtonState(id, enable)
@@ -175,33 +142,32 @@ function SetButtonState(id, enable)
 function UpdateElementsWithData(machine)
 {
    // Setup regex
-   var regex = new RegExp('[A-Z]{1,}[0-9]{1,}');
+   const regex = new RegExp('[A-Z]{1,}[0-9]{1,}');
 
    // Get shortened machine name
-   let shortMachineName = regex.exec(machine.Name);
+   const shortMachineName = regex.exec(machine.Name);
 
    // Set machine name title
-   var machineNameInput = document.getElementById("machineName");
-   machineNameInput.innerHTML = shortMachineName;
+   document.getElementById("machineName").innerHTML = shortMachineName || "Machine Name";
 
    // Get input elements
-   var railroadInput = document.getElementById("railroadInput");
-   var dateInput = document.getElementById("dateInput");
-   var timeInput = document.getElementById("timeInput");
-   var latInput = document.getElementById("latInput");
-   var lngInput = document.getElementById("lngInput");
-   var speedInput = document.getElementById("speedInput");
-   var ip1Input = document.getElementById("ip1Input");
-   var ip2Input = document.getElementById("ip2Input");
-   var ip3Input = document.getElementById("ip3Input");
+   const railroadInput = document.getElementById("railroadInput");
+   const dateInput = document.getElementById("dateInput");
+   const timeInput = document.getElementById("timeInput");
+   const latInput = document.getElementById("latInput");
+   const lngInput = document.getElementById("lngInput");
+   const speedInput = document.getElementById("speedInput");
+   const ip1Input = document.getElementById("ip1Input");
+   const ip2Input = document.getElementById("ip2Input");
+   const ip3Input = document.getElementById("ip3Input");
 
    // Get ip2 and ip3 containers
-   var ip2Container = document.getElementById("ip2Container");
-   var ip3Container = document.getElementById("ip3Container");
+   const ip2Container = document.getElementById("ip2Container");
+   const ip3Container = document.getElementById("ip3Container");
 
    // Get select elements
-   var typeSelect = document.getElementById("typeSelect");
-   var connectionsSelect = document.getElementById("connectionSelect");
+   const typeSelect = document.getElementById("typeSelect");
+   const connectionsSelect = document.getElementById("connectionSelect");
 
    // Set value attributes
    railroadInput.value = machine.Railroad;

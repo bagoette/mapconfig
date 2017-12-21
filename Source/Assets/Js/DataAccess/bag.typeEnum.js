@@ -26,6 +26,8 @@ const ConnectionType =
       {
          if (type === ConnectionType.Properties[i].name)
             return ConnectionType.Properties[i].index;
+
+         return 0;
       }
    },
 
