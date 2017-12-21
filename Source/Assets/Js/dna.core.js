@@ -15,7 +15,7 @@ function ForEach(array, callback)
     for (var i = 0; i < array.length; i++)
     {
         // Pass the item back to the function
-        callback(array[i], i);
+        if (callback(array[i], i) === true) break;
     }
 }
 

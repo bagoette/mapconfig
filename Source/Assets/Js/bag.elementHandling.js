@@ -2,9 +2,9 @@
 // Add all machines to machineList <ul>
 function FillMachineList()
 {
-   let machines = Object.keys(Machines.KeyValues).map((key) =>
+   let machines = Object.keys(Machines).map((key) =>
    {
-      return Machines.KeyValues[key];
+      return Machines[key];
    });
 
    // Loop all machines...
@@ -39,9 +39,30 @@ function FillMachineList()
    });
 }
 
+NodeList.prototype.first = function(callback)
+{
+   let obj;
+
+   ForEach(this, (item, index) =>
+   {
+      if (callback(item)) 
+      {
+         obj = item;
+
+         // Break out of loop
+         return true;
+      }
+   });
+
+   return obj;
+}
+
 function RemoveListItem(index)
 {
-   console.log(index);
+   let filteredItem = 
+      document.querySelectorAll("[data-machine-index]")
+         .first(item => item.getAttribute("data-machine-index") == index);
+
    // Get machineList <ul> from document
    let ul = document.getElementById("machineList");
    let listItems = document.querySelectorAll("[data-machine-index]");
@@ -106,9 +127,9 @@ function ListItemClicked(event)
    // Set element to "this"
    let element = this;
 
-   let machines = Object.keys(Machines.KeyValues).map((key) =>
+   let machines = Object.keys(Machines).map((key) =>
    {
-      return Machines.KeyValues[key];
+      return Machines[key];
    });
 
    // Get machine index to access Machines

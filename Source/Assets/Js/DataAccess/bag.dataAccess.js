@@ -3,10 +3,7 @@ const fs = require('fs');
 const { parseString } = require('xml2js');
 
 // Declare Machines array
-let Machines = 
-{
-   KeyValues: []
-}
+let Machines = [];
 
 // Declare current machine
 let CurrentMachine = 
@@ -61,7 +58,7 @@ function GetDataFromXml(files)
       machine.SetIpData(currentIp);
 
       // Add to Machines array
-      Machines.KeyValues[machine.Name] = machine;
+      Machines[machine.Name] = machine;
    }
 }
 
@@ -71,10 +68,12 @@ function TryRemoveMachine()
    
    if (response)
    {
-      delete Machines.KeyValues[CurrentMachine.Value.Name];
+      delete Machines[CurrentMachine.Value.Name];
 
       RemoveListItem(CurrentMachine.Index);
    }
+
+   document.querySelector(".status-message").innerHTML = `Deleted ${CurrentMachine.Value.Name}`;
 }
 
 // Setter for CurentMachine
