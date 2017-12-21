@@ -18,6 +18,11 @@ function Machine()
 
    this.Connections = 1;
 
+   // Unused attributes to carry along
+   this.Yday = "";
+   this.Color = "";
+   this.City = "";
+
    this.SetGpsData = function(xmlMarker)
    {
       //Pull data from GPS.XML
@@ -28,6 +33,10 @@ function Machine()
       this.Time = xmlMarker.time
       this.Speed = xmlMarker.speed
       this.Railroad = xmlMarker.rr;
+
+      this.Yday = xmlMarker.yday || "";
+      this.Color = xmlMarker.color || "";
+      this.City = xmlMarker.city || "";
    };
 
    this.SetIpData = function(xmlMarker)

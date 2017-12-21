@@ -41,3 +41,8 @@ $('#deleteBtn').click(function()
 {
    TryRemoveMachine();
 });
+
+$('#addBtn').click(function()
+{
+   SaveMachines();
+});

@@ -1,6 +1,9 @@
 // Initialize packages
 const fs = require('fs');
-const { parseString } = require('xml2js');
+const xml2js = require('xml2js');
+const parseString = xml2js.parseString;
+
+const RootPath = "D:\\BagSync\\Node Projects\\MapConfigGit\\mapconfig\\Webroot\\";
 
 // Declare Machines array
 let Machines = [];
@@ -78,20 +81,29 @@ function GetDataFromXml(files)
    }
 }
 
+// Tries to remove a machine
 function TryRemoveMachine()
 {
+   // Confirm with user for deletion
    let response = confirm(`Press OK to delete ${CurrentMachine.Value.Name} or Cancel keep.`);
    
+   // If user says ok...
    if (response === true)
    {
+      // Delete machine from array
       delete Machines[CurrentMachine.Value.Name];
 
+      // Define ul element
       const ul = document.getElementById("machineList");
 
+      // Remove the deleted machine's list item from ul
       RemoveListItemFromUl(CurrentMachine.ListItem, ul);
+
+      // Set status message
       StatusMessage.innerHTML = `Deleted ${CurrentMachine.Value.Name}`;
    }
 
+   // Update all inputs/selects with blank data
    UpdateElementsWithData(new Machine());
 }
 
@@ -138,8 +150,8 @@ function GetMachineDataFromFiles()
    // Set up promise array of parsed files
    Promise.all
    ([
-      ReadFileAsync("D:\\BagSync\\Node Projects\\MapConfigTest\\Webroot\\GPS.xml"),
-      ReadFileAsync("D:\\BagSync\\Node Projects\\MapConfigTest\\Webroot\\IP.xml"),
+      ReadFileAsync("D:\\BagSync\\Node Projects\\MapConfigGit\\mapconfig\\Webroot\\GPS.xml"),
+      ReadFileAsync("D:\\BagSync\\Node Projects\\MapConfigGit\\mapconfig\\Webroot\\IP.xml"),
    ])
    // When finished reading files...
    .then((files) =>
@@ -155,4 +167,74 @@ function GetMachineDataFromFiles()
       // Log errors to console
       console.log(error);
    });
+}
+
+function WriteMachinesToFiles()
+{
+   const builder = new xml2js.Builder();
+   
+   const combinedObject = { GPS: [], IP: [] };
+
+   return new Promise((resolve, reject) =>
+   {
+      let machines = Object.keys(Machines).map((key) =>
+      {
+         return Machines[key];
+      });
+
+      ForEach(machines, (machine, index) =>
+      {
+         combinedObject.GPS.push(
+            {
+               marker: 
+               { $: 
+                  { 
+                     name: machine.Name, 
+                     rr: machine.Railroad,
+                     date: machine.Date,
+                     time: machine.Time,
+                     yday: machine.Yday,
+                     color: machine.Color,
+                     lat: machine.Latitude,
+                     lng: machine.Longitude,
+                     speed: machine.Speed,
+                     city: machine.City
+                  }
+               }
+            });
+   
+         let ip = 
+         {
+            marker: 
+            { $: 
+               { 
+                  name: machine.Name, 
+                  ping: machine.Pingable,
+                  type: machine.Type,
+                  ip: machine.Ip1
+               }
+            }
+         }
+   
+         if (machine.Ip2) ip.marker.$.ip1 = machine.Ip2;
+         if (machine.Ip3) ip.marker.$.ip2 = machine.Ip3;
+   
+         combinedObject.IP.push(ip);
+      });
+   
+      let gpsXml = builder.buildObject({ markers: combinedObject.GPS });
+      let ipXml = builder.buildObject({ markers: combinedObject.IP });
+   
+      fs.writeFileSync(RootPath + "test_gps.xml", gpsXml);
+      fs.writeFileSync(RootPath + "test_ip.xml", ipXml);
+      
+      resolve("Done saving machines to file!");
+   })
+}
+
+function SaveMachines()
+{
+   WriteMachinesToFiles()
+      .then((msg) => console.log(msg))
+      .catch((err) => console.log(err))
 }
