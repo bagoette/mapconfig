@@ -150,8 +150,8 @@ function GetMachineDataFromFiles()
    // Set up promise array of parsed files
    Promise.all
    ([
-      ReadFileAsync("D:\\BagSync\\Node Projects\\MapConfigGit\\mapconfig\\Webroot\\GPS.xml"),
-      ReadFileAsync("D:\\BagSync\\Node Projects\\MapConfigGit\\mapconfig\\Webroot\\IP.xml"),
+      ReadFileAsync(RootPath + "GPS.xml"),
+      ReadFileAsync(RootPath + "IP.xml"),
    ])
    // When finished reading files...
    .then((files) =>
