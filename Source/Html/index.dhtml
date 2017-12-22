@@ -27,7 +27,25 @@
       </nav>
 
       <div class="text-horizontal-center">
-         <h1 id="machineName">Machine Name</h1>
+         <div class="grid-wrapper">
+            <div class="grid">
+               <div class="col one-third"></div>
+               <div class="col one-third">
+                  <h1 id="machineName">Machine Name</h1>
+               </div>
+               <div class="col one-third">
+                  <div id="save">
+                     <span>Save</span>
+                  </div>
+                  <div id="edit">
+                     <span>Edit</span>
+                  </div>
+                  <div id="delete">
+                     <span>Del</span>
+                  </div>
+               </div>
+            </div>
+         </div>
       </div>
 
       <!-- Main content -->
