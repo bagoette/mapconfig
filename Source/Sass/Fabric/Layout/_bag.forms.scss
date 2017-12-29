@@ -34,6 +34,70 @@
       background-color: #363636;
    }
 }
+ 
+.grid-1 
+{
+  padding-top: 50px;
+  display: grid;
+  width: 100%;
+  //max-width: 850px;
+  //max-height: 150px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  grid-template-columns: repeat(2, .8fr) repeat(3, 1fr);
+  grid-gap: 15px;
+
+  grid-template-areas: "header   header   header   header   editor"
+}
+
+/* items */
+
+// .grid-1 div 
+// {
+//   color: white;
+//   font-size: 20px;
+//   padding: 0;
+// }
+
+/* specific item styles */
+
+.item-1 
+{
+  //background: #b03532;
+  grid-area: header;
+
+  text-align: center;
+  grid-column: header-start / span editor-end;
+
+  > h1 
+  {
+     margin: 0;
+  }
+}
+
+.item-2 
+{
+  //background: #33a8a5;
+  grid-area: editor;
+
+  display: grid;
+
+  grid-template-rows: .5fr 1fr;
+
+  text-align: center;
+
+  > div 
+  {
+     grid-row: 2;
+  }
+
+  > div > a 
+  {
+     height: 100%;
+     vertical-align: bottom;
+     padding: 0 5px;
+  }
+}
 
 
 /* Scrollbar styles */

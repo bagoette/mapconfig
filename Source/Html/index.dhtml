@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 
-   <head id="head">
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title id="title">Map Configurator</title>
-      <link href="./Assets/Css/style.css" rel="stylesheet">
-   </head>
+<head id="head">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title id="title">Map Configurator</title>
+   <link href="./Assets/Css/style.css" rel="stylesheet">
+</head>
 
-   <body id="body">
-      <nav id="nav">
-         <div id="showTitle">
+<body id="body">
+   <nav id="nav">
+      <div id="showTitle">
+      </div>
+      <div id="togglers">
+         <div id="minimize">
+            <span>-</span>
          </div>
-         <div id="togglers">
-            <div id="minimize">
-               <span>-</span>
-            </div>
-            <div id="maximize">
-               <span></span>
-            </div>
-            <div id="close">
-               <span>&times;</span>
-            </div>
+         <div id="maximize">
+            <span></span>
          </div>
-      </nav>
+         <div id="close">
+            <span>&times;</span>
+         </div>
+      </div>
+   </nav>
 
-      <div class="text-horizontal-center">
+   <!-- <div class="text-horizontal-center">
          <div class="grid-wrapper">
             <div class="grid">
                <div class="col one-third"></div>
@@ -46,138 +46,147 @@
                </div>
             </div>
          </div>
-      </div>
+      </div> -->
 
-      <!-- Main content -->
-      <div class="fabric-grid-demo">
-         <div class="grid-wrapper">
-            <div class="grid">
-               <div class="col one-third">
-                  <div class="container-scroll">
-                     <ul id="machineList" class="list-group">
-                     </ul>
-                  </div>
-               </div>
-               <div class="col two-ninths">
-                  <ul>
-                     <li>
-                        <div class="form-group has-success">
-                           <label for="railroadInput" class="form-control-label">Railroad</label>
-                           <input id="railroadInput" type="text" placeholder="ie: CN" class="form-control" onkeyup="InputOnKeyUp(this, event)" onkeypress="InputOnKeyDown(this, event)">
-                        </div>
-                     </li>
-                     <li>
-                        <div class="form-group has-success">
-                           <label for="dateInput" class="form-control-label">Date</label>
-                           <input id="dateInput" type="text" placeholder="ie: 12/10/1985" class="form-control" onkeyup="InputOnKeyUp(this, event)">
-                        </div>
-                     </li>
-                     <li>
-                        <div class="form-group has-success">
-                           <label for="timeInput" class="form-control-label">Time</label>
-                           <input id="timeInput" type="text" placeholder="ie: 11:45:00" class="form-control" onkeyup="InputOnKeyUp(this, event)">
-                        </div>
-                     </li>
+   <div class="grid-wrapper">
+      <div class="grid-1">
+         <div class="item-1">
+            <h1 id="machineName">Machine Name</h1>
+         </div>
+         <div class="item-2">
+            <div>
+               <a href="#">Save</a>
+               <a href="#">Edit</a>
+               <a href="#">Del</a>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- Main content -->
+   <div class="fabric-grid-demo">
+      <div class="grid-wrapper">
+         <div class="grid">
+            <div class="col one-third">
+               <div class="container-scroll">
+                  <ul id="machineList" class="list-group">
                   </ul>
                </div>
-               <div class="col two-ninths">
-                  <ul>
-                     <li>
-                        <div class="form-group">
-                           <label for="typeSelect" class="form-control-label">Type</label>
-                           <select id="typeSelect" class="custom-select">
+            </div>
+            <div class="col two-ninths">
+               <ul>
+                  <li>
+                     <div class="form-group has-success">
+                        <label for="railroadInput" class="form-control-label">Railroad</label>
+                        <input id="railroadInput" type="text" placeholder="ie: CN" class="form-control" onkeyup="InputOnKeyUp(this, event)" onkeypress="InputOnKeyDown(this, event)">
+                     </div>
+                  </li>
+                  <li>
+                     <div class="form-group has-success">
+                        <label for="dateInput" class="form-control-label">Date</label>
+                        <input id="dateInput" type="text" placeholder="ie: 12/10/1985" class="form-control" onkeyup="InputOnKeyUp(this, event)">
+                     </div>
+                  </li>
+                  <li>
+                     <div class="form-group has-success">
+                        <label for="timeInput" class="form-control-label">Time</label>
+                        <input id="timeInput" type="text" placeholder="ie: 11:45:00" class="form-control" onkeyup="InputOnKeyUp(this, event)">
+                     </div>
+                  </li>
+               </ul>
+            </div>
+            <div class="col two-ninths">
+               <ul>
+                  <li>
+                     <div class="form-group">
+                        <label for="typeSelect" class="form-control-label">Type</label>
+                        <select id="typeSelect" class="custom-select">
                            </select>
-                        </div>
-                     </li>
-                     <li>
-                        <div class="form-group has-success">
-                           <label for="latInput" class="form-control-label">Latitude</label>
-                           <input id="latInput" type="text" placeholder="ie: 39.412354" class="form-control" onkeyup="InputOnKeyUp(this, event)">
-                        </div>
-                     </li>
-                     <li>
-                        <div class="form-group has-success">
-                           <label for="lngInput" class="form-control-label">Longitude</label>
-                           <input id="lngInput" type="text" placeholder="ie: -90.04556" class="form-control" onkeyup="InputOnKeyUp(this, event)">
-                        </div>
-                     </li>
-                     <li>
-                        <div class="form-group has-success">
-                           <label for="speedInput" class="form-control-label">Speed</label>
-                           <input id="speedInput" type="text" placeholder="ie: 12.5" class="form-control" onkeyup="InputOnKeyUp(this, event)">
-                        </div>
-                     </li>
-                  </ul>
-               </div>
-               <div class="col two-ninths">
-                  <ul>
-                     <li>
-                        <div class="form-group">
-                           <label for="connectionSelect" class="form-control-label">Connections</label>
-                           <select id="connectionSelect" class="custom-select">
+                     </div>
+                  </li>
+                  <li>
+                     <div class="form-group has-success">
+                        <label for="latInput" class="form-control-label">Latitude</label>
+                        <input id="latInput" type="text" placeholder="ie: 39.412354" class="form-control" onkeyup="InputOnKeyUp(this, event)">
+                     </div>
+                  </li>
+                  <li>
+                     <div class="form-group has-success">
+                        <label for="lngInput" class="form-control-label">Longitude</label>
+                        <input id="lngInput" type="text" placeholder="ie: -90.04556" class="form-control" onkeyup="InputOnKeyUp(this, event)">
+                     </div>
+                  </li>
+                  <li>
+                     <div class="form-group has-success">
+                        <label for="speedInput" class="form-control-label">Speed</label>
+                        <input id="speedInput" type="text" placeholder="ie: 12.5" class="form-control" onkeyup="InputOnKeyUp(this, event)">
+                     </div>
+                  </li>
+               </ul>
+            </div>
+            <div class="col two-ninths">
+               <ul>
+                  <li>
+                     <div class="form-group">
+                        <label for="connectionSelect" class="form-control-label">Connections</label>
+                        <select id="connectionSelect" class="custom-select">
                                  <option value="1">1</option>
                                  <option value="2">2</option>
                                  <option value="3">3</option>
                            </select>
-                        </div>
-                     </li>
-                     <li>
-                        <div id="ip1Container" class="form-group has-success">
-                           <label for="ip1Input" class="form-control-label">IP-1</label>
-                           <input id="ip1Input" type="text" placeholder="ie: 166.159.232.111" class="form-control" onkeyup="InputOnKeyUp(this, event)">
-                        </div>
-                     </li>
-                     <li>
-                        <div id="ip2Container" class="form-group has-success">
-                           <label for="ip2Input" class="form-control-label">IP-2</label>
-                           <input id="ip2Input" type="text" placeholder="ie: 166.159.232.112" class="form-control" onkeyup="InputOnKeyUp(this, event)">
-                        </div>
-                     </li>
-                     <li>
-                        <div id="ip3Container" class="form-group has-success">
-                           <label for="ip3Input" class="form-control-label">IP-3</label>
-                           <input id="ip3Input" type="text" placeholder="ie: 166.159.232.113" class="form-control" onkeyup="InputOnKeyUp(this, event)">
-                        </div>
-                     </li>
-                  </ul>
-               </div>
+                     </div>
+                  </li>
+                  <li>
+                     <div id="ip1Container" class="form-group has-success">
+                        <label for="ip1Input" class="form-control-label">IP-1</label>
+                        <input id="ip1Input" type="text" placeholder="ie: 166.159.232.111" class="form-control" onkeyup="InputOnKeyUp(this, event)">
+                     </div>
+                  </li>
+                  <li>
+                     <div id="ip2Container" class="form-group has-success">
+                        <label for="ip2Input" class="form-control-label">IP-2</label>
+                        <input id="ip2Input" type="text" placeholder="ie: 166.159.232.112" class="form-control" onkeyup="InputOnKeyUp(this, event)">
+                     </div>
+                  </li>
+                  <li>
+                     <div id="ip3Container" class="form-group has-success">
+                        <label for="ip3Input" class="form-control-label">IP-3</label>
+                        <input id="ip3Input" type="text" placeholder="ie: 166.159.232.113" class="form-control" onkeyup="InputOnKeyUp(this, event)">
+                     </div>
+                  </li>
+               </ul>
             </div>
          </div>
       </div>
+   </div>
 
-      <!-- Control buttons -->
-      <div class="fabric-grid-demo">
-         <div class="grid-wrapper">
-            <div class="grid">
-               <div class="col one-third">
-                  <div>
-                     <button id="addBtn" type="button" class="btn btn-success">+</button>
-                     <button id="deleteBtn" type="button" class="btn btn-danger">-</button>
-                  </div>
+   <!-- Control buttons -->
+   <div class="fabric-grid-demo">
+      <div class="grid-wrapper">
+         <div class="grid">
+            <div class="col one-third">
+               <div>
+                  <button id="addBtn" type="button" class="btn btn-success">+</button>
+                  <button id="deleteBtn" type="button" class="btn btn-danger">-</button>
                </div>
-               <div class="col two-thirds">
-                  <div>
-                     <button id="undoBtn" type="button" class="btn btn-primary">Undo</button>
-                     <button id="editBtn" type="button" class="btn btn-primary">Edit</button>
-                     <button id="cancelBtn" type="button" class="btn btn-danger">Cancel</button>
-                  </div>
+            </div>
+            <div class="col two-thirds">
+               <div>
+                  <button id="undoBtn" type="button" class="btn btn-primary">Undo</button>
+                  <button id="editBtn" type="button" class="btn btn-primary">Edit</button>
+                  <button id="cancelBtn" type="button" class="btn btn-danger">Cancel</button>
                </div>
             </div>
          </div>
       </div>
-      
-      <div class="status-bar">
-         <label class="status-label">Status: </label>
-         <label class="status-message">Message</label>
-      </div>
-   </body>
-   <script type="text/javascript" src="./Assets/Js/aligner.js"></script>
-   <script type="text/javascript" src="./Assets/Js/menuHandler.js"></script>
-   <script type="text/javascript" src="./Assets/Js/init.js"></script>
-   <script type="text/javascript" src="./Assets/Js/dna.core.js"></script>
-   <script type="text/javascript" src="./Assets/Js/bag.init.js"></script>
-   <script type="text/javascript" src="./Assets/Js/DataAccess/bag.typeEnum.js"></script>
-   <script type="text/javascript" src="./Assets/Js/bag.elementHandling.js"></script>
-   <script type="text/javascript" src="./Assets/Js/DataAccess/bag.machine.js"></script>
-   <script type="text/javascript" src="./Assets/Js/DataAccess/bag.dataAccess.js"></script>
+   </div>
+
+   <div class="status-bar">
+      <label class="status-label">Status: </label>
+      <label class="status-message">Message</label>
+   </div>
+</body>
+
+<!--@ include scripts @-->
+
 </html>
