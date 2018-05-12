@@ -55,9 +55,10 @@
          </div>
          <div class="item-2">
             <div>
-               <a href="#">Save</a>
-               <a href="#">Edit</a>
-               <a href="#">Del</a>
+               <a id="addButton" class="ion-plus-round" href="#"></a>
+               <a id="saveButton" class="ion-ios-download-outline" href="#"></a>
+               <a id="editButton" class="ion-edit" href="#"></a>
+               <a id="deleteButton" class="ion-ios-trash-outline" href="#"></a>
             </div>
          </div>
       </div>
@@ -100,8 +101,7 @@
                   <li>
                      <div class="form-group">
                         <label for="typeSelect" class="form-control-label">Type</label>
-                        <select id="typeSelect" class="custom-select">
-                           </select>
+                        <select id="typeSelect" class="custom-select" onchange="ConnectionSelectChanged(this, event)"></select>
                      </div>
                   </li>
                   <li>
@@ -129,11 +129,11 @@
                   <li>
                      <div class="form-group">
                         <label for="connectionSelect" class="form-control-label">Connections</label>
-                        <select id="connectionSelect" class="custom-select">
+                        <select id="connectionSelect" class="custom-select" onchange="ConnectionSelectChanged(this, event)">
                                  <option value="1">1</option>
                                  <option value="2">2</option>
                                  <option value="3">3</option>
-                           </select>
+                        </select>
                      </div>
                   </li>
                   <li>
@@ -161,7 +161,7 @@
    </div>
 
    <!-- Control buttons -->
-   <div class="fabric-grid-demo">
+   <div class="fabric-grid-demo hidden">
       <div class="grid-wrapper">
          <div class="grid">
             <div class="col one-third">

@@ -2,6 +2,7 @@
 const fs = require('fs');
 const xml2js = require('xml2js');
 const parseString = xml2js.parseString;
+const { isNullOrUndefined } = require('util');
 
 const RootPath = "D:\\BagSync\\Node Projects\\MapConfigGit\\mapconfig\\Webroot\\";
 
@@ -14,11 +15,20 @@ let StatusMessage;
 // Declare current machine
 const CurrentMachine = 
 {
-   Value: null,
+   // Flag to indicate if edits are enabled
+   EditsEnabled: false,
 
+   // Flag to indicate if any edits are in progress
+   EditsExist: false,
+   
+   // Index of this machine in array
    Index: null,
-
+   
+   // List item element reference
    ListItem: null,
+
+   // Reference to actual machine in array
+   Value: null,
 
    SetListItem: function(item)
    {
@@ -81,68 +91,6 @@ function GetDataFromXml(files)
    }
 }
 
-// Tries to remove a machine
-function TryRemoveMachine()
-{
-   // Confirm with user for deletion
-   let response = confirm(`Press OK to delete ${CurrentMachine.Value.Name} or Cancel keep.`);
-   
-   // If user says ok...
-   if (response === true)
-   {
-      // Delete machine from array
-      delete Machines[CurrentMachine.Value.Name];
-
-      // Define ul element
-      const ul = document.getElementById("machineList");
-
-      // Remove the deleted machine's list item from ul
-      RemoveListItemFromUl(CurrentMachine.ListItem, ul);
-
-      // Set status message
-      StatusMessage.innerHTML = `Deleted ${CurrentMachine.Value.Name}`;
-   }
-
-   // Update all inputs/selects with blank data
-   UpdateElementsWithData(new Machine());
-}
-
-// Setter for CurentMachine
-function SetCurrentMachine(newMachine)
-{
-   // Make sure value has changed
-   if (CurrentMachine === newMachine)
-      // Return false if value hasn't changed
-      return false;
-
-   // Set new value
-   CurrentMachine = newMachine;
-
-   SetButtonSate("deleteBtn", true);
-
-   // Return true when new value was set
-   return true;
-}
-
-// Reads a file asynchronously
-function ReadFileAsync(path)
-{
-   // Return a promise to parsed file
-   return new Promise((resolve, reject) =>
-   {
-      // Read file
-      fs.readFile(path, (err, data) => 
-      {
-         // Parse xml to json
-         parseString(data, (err, result) => 
-         {
-            // Callback result
-            resolve(result);
-         });
-      });
-   });
-}
-
 // Reads machine data from xmls, parses to objects,
 // stores in memory and fills the view's list group
 function GetMachineDataFromFiles()
@@ -167,6 +115,68 @@ function GetMachineDataFromFiles()
       // Log errors to console
       console.log(error);
    });
+}
+
+// Reads a file asynchronously
+function ReadFileAsync(path)
+{
+   // Return a promise to parsed file
+   return new Promise((resolve, reject) =>
+   {
+      // Read file
+      fs.readFile(path, (err, data) => 
+      {
+         // Parse xml to json
+         parseString(data, (err, result) => 
+         {
+            // Callback result
+            resolve(result);
+         });
+      });
+   });
+}
+
+// Setter for CurentMachine
+function SetCurrentMachine(newMachine)
+{
+   // Make sure value has changed
+   if (CurrentMachine === newMachine)
+      // Return false if value hasn't changed
+      return false;
+
+   // Set new value
+   CurrentMachine = newMachine;
+
+   //SetButtonSate("deleteBtn", true);
+
+   // Return true when new value was set
+   return true;
+}
+
+// Tries to remove a machine
+function TryRemoveMachine()
+{
+   // Confirm with user for deletion
+   let response = confirm(`Press OK to delete ${CurrentMachine.Value.Name} or Cancel keep.`);
+   
+   // If user says ok...
+   if (response === true)
+   {
+      // Delete machine from array
+      delete Machines[CurrentMachine.Value.Name];
+
+      // Define ul element
+      const ul = document.getElementById("machineList");
+
+      // Remove the deleted machine's list item from ul
+      RemoveListItemFromUl(CurrentMachine.ListItem, ul);
+
+      // Set status message
+      StatusMessage.innerHTML = `Deleted ${CurrentMachine.Value.Name}`;
+   }
+
+   // Update all inputs/selects with blank data
+   UpdateElementsWithData(new Machine());
 }
 
 function WriteMachinesToFiles()
@@ -232,9 +242,49 @@ function WriteMachinesToFiles()
    })
 }
 
-function SaveMachines()
+function AddMachine()
 {
-   WriteMachinesToFiles()
-      .then((msg) => console.log(msg))
-      .catch((err) => console.log(err))
+   console.log("hey adding machine");
+}
+
+function SaveMachine()
+{
+   console.log("oh hi ohhh");
+   // WriteMachinesToFiles()
+   //    .then((msg) => console.log(msg))
+   //    .catch((err) => console.log(err))
+}
+
+function EditMachine()
+{
+   if (!isNullOrUndefined(CurrentMachine.Value))
+   {
+      // If already enabled...
+      if (CurrentMachine.EditsEnabled)
+      {
+         // Set elements to disabled
+         SetAllElementStates(false);
+         
+         if (CurrentMachine.EditsExist)
+         {
+            UpdateElementsWithData(CurrentMachine.Value);
+
+            CurrentMachine.EditsExist = false;
+
+            StatusMessage.innerHTML = `Cancelled editing ${CurrentMachine.Value.Name}`;
+         }
+         else
+            StatusMessage.innerHTML = `${CurrentMachine.Value.Name} selected`;
+      }
+      // Otherwise...
+      else
+      {
+         // Set elements to enabled
+         SetAllElementStates(true);
+
+         StatusMessage.innerHTML = `Editing ${CurrentMachine.Value.Name}`;
+      }
+
+      CurrentMachine.EditsEnabled ^= true;
+   }
 }

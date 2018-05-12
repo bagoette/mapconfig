@@ -15,9 +15,9 @@ function InitBtnStates()
    // Create array of buttons to disable
    let buttons = 
    [
-      document.getElementById("cancelBtn"),
-      document.getElementById("deleteBtn"),
-      document.getElementById("undoBtn"),
+      document.getElementById("editButton"),
+      document.getElementById("saveButton"),
+      document.getElementById("deleteButton"),
    ];
 
    // Disable all buttons in the array
@@ -25,8 +25,8 @@ function InitBtnStates()
    {
       button.classList.add("disabled");
 
-      let attr = document.createAttribute('disabled');
-      button.setAttributeNode(attr);
+      //let attr = document.createAttribute('disabled');
+      //button.setAttributeNode(attr);
    });
 }
 

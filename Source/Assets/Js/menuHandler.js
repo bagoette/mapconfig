@@ -25,24 +25,30 @@ $('#maximize').click(function()
    }
 });
 
-$('#editBtn').click(function()
+$('#editButton').click(function(e)
 {
-   // If already enabled...
-   if (ElementsEnabled)
-      // Set elements to disabled
-      SetAllElementStates(false);
-   // Otherwise...
-   else
-      // Set elements to enabled
-      SetAllElementStates(true);
+   e.preventDefault();
+
+   EditMachine();
 });
 
-$('#deleteBtn').click(function()
+$('#deleteButton').click(function(e)
 {
+   e.preventDefault();
+
    TryRemoveMachine();
 });
 
-$('#addBtn').click(function()
+$('#addButton').click(function(e)
 {
-   SaveMachines();
+   e.preventDefault();
+
+   AddMachine();
+});
+
+$('#saveButton').click(function(e)
+{
+   e.preventDefault();
+
+   SaveMachine();
 });

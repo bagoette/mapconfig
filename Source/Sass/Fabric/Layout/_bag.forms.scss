@@ -37,13 +37,13 @@
  
 .grid-1 
 {
-  padding-top: 50px;
+  padding-top: 60px;
   display: grid;
   width: 100%;
   //max-width: 850px;
   //max-height: 150px;
   margin: 0 auto;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
   grid-template-columns: repeat(2, .8fr) repeat(3, 1fr);
   grid-gap: 15px;
 
@@ -95,7 +95,15 @@
   {
      height: 100%;
      vertical-align: bottom;
-     padding: 0 5px;
+     padding: 0 10px;
+     font-size: $font-large;
+     color: yellowgreen;
+
+     &.disabled
+     {
+        pointer-events: none;
+        opacity: 0.4;
+     }
   }
 }
 

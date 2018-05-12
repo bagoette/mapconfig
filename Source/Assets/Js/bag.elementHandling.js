@@ -39,16 +39,20 @@ function FillMachineList()
    });
 }
 
-function RemoveListItemFromUl(item, ul)
+function ConnectionSelectChanged(select, event)
 {
-   // Remove item from ul
-   ul.removeChild(item);
+   if (!CurrentMachine.EditsExist)
+      CurrentMachine.EditsExist = true;
 
-   // Loop through and reset indexes
-   ForEach(ul.children, (child, index) => 
-   {
-      child.setAttribute("data-machine-index", index);
-   });
+   console.log(select.selectedIndex);
+}
+
+function TypeSelectChanged(select, event)
+{
+   if (!CurrentMachine.EditsExist)
+      CurrentMachine.EditsExist = true;
+      
+   console.log(select.selectedIndex);
 }
 
 // Called when user releases key in input
@@ -62,9 +66,11 @@ function InputOnKeyUp(input, event)
        event.key === "ArrowUp" ||
        event.key === "ArrowDown" ||
        event.key === "ArrowLeft" ||     
-       event.key === "ArrowRight"   
-      ) return;
+       event.key === "ArrowRight") return;
 
+   if (!CurrentMachine.EditsExist)
+      CurrentMachine.EditsExist = true;
+         
    ValidateInputData(input);
 }
 
@@ -117,7 +123,23 @@ function ListItemClicked(event)
    // Update HTML elements
    UpdateElementsWithData(machine);
 
+   // Enable edit and delete button
+   SetButtonState("editButton", true);
+   SetButtonState("deleteButton", true);
+
    StatusMessage.innerHTML = `${machine.Name} selected`;
+}
+
+function RemoveListItemFromUl(item, ul)
+{
+   // Remove item from ul
+   ul.removeChild(item);
+
+   // Loop through and reset indexes
+   ForEach(ul.children, (child, index) => 
+   {
+      child.setAttribute("data-machine-index", index);
+   });
 }
 
 function SetButtonState(id, enable)
