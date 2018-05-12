@@ -6,13 +6,17 @@
   "scripts": {
     "start": "electron ."
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bagoette/mapconfig.git"
+  },
   "author": "Barney Goette",
   "license": "ISC",
   "dependencies": {
-    "electron": "^1.7.9",
-    "jquery": "^3.2.1",
-    "jsdom": "^11.5.1",
-    "socket.io-client": "^2.0.4",
+    "electron": "^1.8.6",
+    "jquery": "^3.3.1",
+    "jsdom": "^11.10.0",
+    "socket.io-client": "^2.1.0",
     "xml2js": "^0.4.19"
   },
   "Theme": "Dark"
