@@ -94,6 +94,8 @@ function CheckInputLength(input, length)
 // Called when machine list item is clicked
 function ListItemClicked(event)
 {
+    if (CurrentMachine.EditsEnabled) return;
+
    // Set element to "this"
    let element = this;
 
